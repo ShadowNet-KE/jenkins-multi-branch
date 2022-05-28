@@ -1,7 +1,7 @@
 // Jenkinsfile (Scripted Pipeline)
 
 pipeline { 
-    agent any 
+    agent { label 'docker' }
     options {
         skipStagesAfterUnstable()
     }
