@@ -1,21 +1,15 @@
 // Jenkinsfile (Declarative Pipeline)
+
 pipeline {
-    agent any 
+    agent {
+        docker { image 'node:16.13.1-alpine' }
+    }
     stages {
-        stage('Build') { 
+        stage('Test') {
             steps {
-                sh 'ls'
-            }
-        }
-        stage('Test') { 
-            steps {
-                sh 'df -h'
-            }
-        }
-        stage('Deploy') { 
-            steps {
-                sh 'ls -lh'
+                sh 'node --version'
             }
         }
     }
 }
+
