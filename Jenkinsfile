@@ -1,8 +1,14 @@
-timeout(unit: 'SECONDS', time: 50) {
-    stage("One"){
-        node("jenkins-agent") {
-            sleep 5
-            echo 'Hello'
+//Jenkinsfile (Declarative Pipeline)
+
+pipeline {
+    agent { dockerfile true }
+    stages {
+        stage('Test') {
+            steps {
+                sh 'node --version'
+                sh 'svn --version'
+            }
         }
     }
 }
+
