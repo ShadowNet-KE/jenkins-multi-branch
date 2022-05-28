@@ -1,7 +1,7 @@
 //Jenkinsfile (Declarative Pipeline)
 
 pipeline {
-    agent { dockerfile true }
+    agent { label 'docker' } { dockerfile true }
 
 //     checkout scm
 
