@@ -1,6 +1,9 @@
 pipeline {
     agent none
-    options { parallelsAlwaysFailFast() }
+//     options { parallelsAlwaysFailFast() }
+    options {
+      buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '2', numToKeepStr: '20')
+    }
     triggers {
         cron('H */4 * * 1-5')
     }
