@@ -1,13 +1,10 @@
 pipeline {
-    agent any
-    parameters {
-        string(name: 'Greeting', defaultValue: 'Hello', description: 'How should I greet the world?')
-    }
-    stages {
-        stage('Example') {
-            steps {
-                echo "${params.Greeting} World!"
-            }
+    node("myAgent") {
+    timeout(unit: 'SECONDS', time: 5) {
+        stage("One"){
+            sleep 10
+            echo 'hello'
         }
     }
+ }
 }
