@@ -4,6 +4,7 @@ pipeline {
     agent { label 'docker' }
     options {
         skipStagesAfterUnstable()
+        buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '2', numToKeepStr: '20')
     }
     stages {
         stage('Build') { 
