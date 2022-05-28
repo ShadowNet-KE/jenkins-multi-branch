@@ -3,9 +3,13 @@ pipeline {
     stages {
         stage('Example Jenkins-agent') {
             agent { label 'jenkins-agent' }
+            environment { 
+                AN_ACCESS_KEY = credentials('my-predefined-secret-text') 
+            }
             steps {
                 echo 'Hello, Jenkins Agent'
                 sh 'java -version'
+                sh 'printenv'
             }
         }
         stage('Example Docker') {
@@ -13,6 +17,7 @@ pipeline {
             steps {
                 echo 'Hello, Docker'
                 sh 'java -version'
+                sh 'printenv'
             }
         }
     }
