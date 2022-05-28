@@ -8,7 +8,7 @@ pipeline {
                 timeout(time: 1, unit: 'HOURS') 
             }
             environment { 
-                AN_ACCESS_KEY = credentials('slack') 
+                AN_ACCESS_KEY = credentials('69bd57cc-eb83-4320-aa0b-c475ebb96cf5') 
             }
             steps {
                 echo 'Hello, Jenkins Agent'
