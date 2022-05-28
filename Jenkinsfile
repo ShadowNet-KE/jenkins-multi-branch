@@ -1,36 +1,46 @@
 pipeline {
     agent none
-    options { parallelsAlwaysFailFast() }
-    triggers {
-        cron('H */4 * * 1-5')
-    }
     stages {
-        stage('Example Jenkins-agent') {
-            agent { label 'jenkins-agent' }
-            options {
-                timeout(time: 10, unit: 'MINUTES') 
-            }
-            environment { 
-                AN_ACCESS_KEY = credentials('69bd57cc-eb83-4320-aa0b-c475ebb96cf5') 
+        stage('Non-Sequential Stage') {
+            agent {
+                label 'jenkins-agent'
             }
             steps {
-                echo 'Hello, Jenkins Agent'
-                sh 'java -version'
-                sh 'printenv'
+                echo "On Non-Sequential Stage"
             }
         }
-        stage('Example Docker') {
-            agent { label 'docker' }
-            options {
-                timeout(time: 10, unit: 'MINUTES') 
+        stage('Sequential') {
+            agent {
+                label 'docker'
             }
-            environment { 
-                AN_ACCESS_KEY = credentials('69bd57cc-eb83-4320-aa0b-c475ebb96cf5') 
+            environment {
+                FOR_SEQUENTIAL = "some-value"
             }
-            steps {
-                echo 'Hello, Docker'
-                sh 'java -version'
-                sh 'printenv'
+            stages {
+                stage('In Sequential 1') {
+                    steps {
+                        echo "In Sequential 1"
+                    }
+                }
+                stage('In Sequential 2') {
+                    steps {
+                        echo "In Sequential 2"
+                    }
+                }
+                stage('Parallel In Sequential') {
+                    parallel {
+                        stage('In Parallel 1') {
+                            steps {
+                                echo "In Parallel 1"
+                            }
+                        }
+                        stage('In Parallel 2') {
+                            steps {
+                                echo "In Parallel 2"
+                            }
+                        }
+                    }
+                }
             }
         }
     }
