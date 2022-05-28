@@ -1,14 +1,26 @@
 // Jenkinsfile (Scripted Pipeline)
 
-node {  
-    stage('Build') { 
-        sh 'ls'
+pipeline { 
+    agent any 
+    options {
+        skipStagesAfterUnstable()
     }
-    stage('Test') { 
-        sh 'df -h'
-    }
-    stage('Deploy') { 
-        sh 'ls -lh'
+    stages {
+        stage('Build') { 
+            steps { 
+                sh 'make' 
+            }
+        }
+        stage('Test'){
+            steps {
+                sh 'make check'
+                junit 'reports/**/*.xml' 
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh 'make publish'
+            }
+        }
     }
 }
-
