@@ -4,7 +4,7 @@ pipeline {
         stage('Example Jenkins-agent') {
             agent { label 'jenkins-agent' }
             environment { 
-                AN_ACCESS_KEY = credentials('my-predefined-secret-text') 
+                AN_ACCESS_KEY = credentials('slack') 
             }
             steps {
                 echo 'Hello, Jenkins Agent'
