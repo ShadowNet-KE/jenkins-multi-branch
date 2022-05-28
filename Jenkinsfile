@@ -1,18 +1,41 @@
 pipeline {
-    agent any
+    agent none
     stages {
-        stage('Test') {
+        stage('Build') {
+            agent any
             steps {
-                sh 'make check'
+                checkout scm
+                sh 'make'
+                stash includes: '**/target/*.jar', name: 'app' 
             }
         }
-    }
-    post {
-        always {
-            junit '**/target/*.xml'
+        stage('Test on Docker') {
+            agent { 
+                label 'docker'
+            }
+            steps {
+                unstash 'app' 
+                sh 'make check'
+            }
+            post {
+                always {
+                    junit '**/target/*.xml'
+                }
+            }
         }
-        failure {
-            mail to: team@example.com, subject: 'The Pipeline failed :('
+        stage('Test on Windows') {
+            agent {
+                label 'windows'
+            }
+            steps {
+                unstash 'app'
+                bat 'make check' 
+            }
+            post {
+                always {
+                    junit '**/target/*.xml'
+                }
+            }
         }
     }
 }
