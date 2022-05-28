@@ -1,6 +1,9 @@
 // https://www.jenkins.io/doc/book/pipeline/jenkinsfile/
 pipeline {
     agent any
+    options {
+      buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '2', numToKeepStr: '20')
+    }
 
     stages {
         stage('Example') {
