@@ -4,6 +4,9 @@ pipeline {
     stages {
         stage('Example Jenkins-agent') {
             agent { label 'jenkins-agent' }
+            options {
+                timeout(time: 1, unit: 'HOURS') 
+            }
             environment { 
                 AN_ACCESS_KEY = credentials('slack') 
             }
@@ -15,6 +18,9 @@ pipeline {
         }
         stage('Example Docker') {
             agent { label 'docker' }
+            options {
+                timeout(time: 1, unit: 'HOURS') 
+            }
             steps {
                 echo 'Hello, Docker'
                 sh 'java -version'
