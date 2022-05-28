@@ -1,21 +1,14 @@
-// Jenkinsfile (Declarative Pipeline)
-pipeline {
-    agent any 
-    stages {
-        stage('Build') { 
-            steps {
-                sh 'ls'
-            }
-        }
-        stage('Test') { 
-            steps {
-                sh 'df -h'
-            }
-        }
-        stage('Deploy') { 
-            steps {
-                sh 'ls -lh'
-            }
-        }
+// Jenkinsfile (Scripted Pipeline)
+
+node {  
+    stage('Build') { 
+        sh 'ls'
+    }
+    stage('Test') { 
+        sh 'df -h'
+    }
+    stage('Deploy') { 
+        sh 'ls -lh'
     }
 }
+
