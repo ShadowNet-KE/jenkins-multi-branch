@@ -1,25 +1,21 @@
-// Jenkinsfile (Scripted Pipeline)
+// https://www.jenkins.io/doc/book/pipeline/jenkinsfile/
+pipeline {
+    agent any
 
-pipeline { 
-    agent { label 'docker' }
-    options {
-        skipStagesAfterUnstable()
-    }
     stages {
-        stage('Build') { 
-            steps { 
-                sh 'make' 
+        stage('Build') {
+            steps {
+                echo 'Building..'
             }
         }
-        stage('Test'){
+        stage('Test') {
             steps {
-                sh 'make check'
-                junit 'reports/**/*.xml' 
+                echo 'Testing..'
             }
         }
         stage('Deploy') {
             steps {
-                sh 'make publish'
+                echo 'Deploying....'
             }
         }
     }
