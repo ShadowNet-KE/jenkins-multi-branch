@@ -3,7 +3,7 @@
 pipeline {
     agent { dockerfile true }
 
-    checkout scm
+//     checkout scm
 
     stages {
         stage('Test') {
