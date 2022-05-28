@@ -5,7 +5,7 @@ pipeline {
             agent { label 'jenkins-agent' }
             steps {
                 echo 'Hello, Jenkins Agent'
-                sh 'mvn --version'
+                sh 'java -version'
             }
         }
         stage('Example Docker') {
