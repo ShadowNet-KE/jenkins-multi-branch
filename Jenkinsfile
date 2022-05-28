@@ -1,5 +1,6 @@
 pipeline {
-    agent none 
+    agent none
+    options { parallelsAlwaysFailFast() }
     stages {
         stage('Example Jenkins-agent') {
             agent { label 'jenkins-agent' }
