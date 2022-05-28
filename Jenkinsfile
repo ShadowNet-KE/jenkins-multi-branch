@@ -1,14 +1,10 @@
-// Jenkinsfile (Declarative Pipeline)
+// Jenkinsfile (Scripted Pipeline)
 
-pipeline {
-    agent {
-        docker { image 'node:16.13.1-alpine' }
-    }
-    stages {
+node {
+    /* Requires the Docker Pipeline plugin to be installed */
+    docker.image('node:16.13.1-alpine').inside {
         stage('Test') {
-            steps {
-                sh 'node --version'
-            }
+            sh 'node --version'
         }
     }
 }
