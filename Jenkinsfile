@@ -1,40 +1,18 @@
 pipeline {
-    agent none
+    agent none 
     stages {
-        stage('Build') {
-            agent any
+        stage('Example Jenkins-agent') {
+            agent { label 'jenkins-agent' }
             steps {
-                checkout scm
-                sh 'make'
-                stash includes: '**/target/*.jar', name: 'app' 
+                echo 'Hello, Jenkins Agent'
+                sh 'mvn --version'
             }
         }
-        stage('Test on Docker') {
-            agent { 
-                label 'docker'
-            }
+        stage('Example Docker') {
+            agent { label 'docker' }
             steps {
-                unstash 'app' 
-                sh 'make check'
-            }
-            post {
-                always {
-                    junit '**/target/*.xml'
-                }
-            }
-        }
-        stage('Test on Windows') {
-            agent {
-                label 'windows'
-            }
-            steps {
-                unstash 'app'
-                bat 'make check' 
-            }
-            post {
-                always {
-                    junit '**/target/*.xml'
-                }
+                echo 'Hello, Docker'
+                sh 'java -version'
             }
         }
     }
