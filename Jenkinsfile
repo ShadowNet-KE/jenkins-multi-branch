@@ -1,14 +1,5 @@
-pipeline {
-  agent any
-  environment {
-    EXAMPLE_KEY = credentials('example-credentials-id') // Secret value is 'sec%ret'
-  }
-  stages {
-    stage('Example') {
-      steps {
-          /* CORRECT */
-          bat 'echo %EXAMPLE_KEY%'
-      }
-    }
-  }
+properties([parameters([string(defaultValue: 'Hello', description: 'How should I greet the world?', name: 'Greeting')])])
+
+node {
+    echo "${params.Greeting} World!"
 }
