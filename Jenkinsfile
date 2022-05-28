@@ -1,27 +1,14 @@
-// https://www.jenkins.io/doc/book/pipeline/jenkinsfile/
 pipeline {
-    agent any
-
-    stages {
-        stage('Example') {
-            steps {
-                echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-            }
-        }
-        stage('Build') {
-            steps {
-                echo 'Building..'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
+  agent any
+  environment {
+    EXAMPLE_KEY = credentials('example-credentials-id') // Secret value is 'sec%ret'
+  }
+  stages {
+    stage('Example') {
+      steps {
+          /* CORRECT */
+          bat 'echo %EXAMPLE_KEY%'
+      }
     }
+  }
 }
