@@ -4,19 +4,14 @@ pipeline {
       buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '2', numToKeepStr: '20')
     }
     stages {
-        stage('Build') {
-            agent any
-            steps {
-                checkout scm
-                sh 'make'
-                stash includes: '**/target/*.jar', name: 'app' 
-            }
-        }
         stage('DIND Test') {
             agent {
                 label 'dind-1.0.0'
             }
             steps {
+                checkout scm
+                sh 'make'
+                stash includes: '**/target/*.jar', name: 'app' 
                 unstash 'app'
                 bat 'make check' 
             }
