@@ -11,7 +11,7 @@ pipeline {
             steps {
                 checkout scm
                 sh 'make'
-                sh 'make check'
+                sh 'make test'
             }
         }
 //         stage('Default Test') {
