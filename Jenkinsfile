@@ -11,22 +11,16 @@ pipeline {
             steps {
                 checkout scm
                 sh 'make'
-                sh 'make test'
             }
         }
-//         stage('Default Test') {
-//             agent { 
-//                 label 'jenkins-agent'
-//             }
-//             steps {
-//                 unstash 'app' 
-//                 sh 'make check'
-//             }
-//             post {
-//                 always {
-//                     junit '**/target/*.xml'
-//                 }
-//             }
-//         }
+        stage('Jenkins Test') {
+            agent {
+                label 'jenkins-agent'
+            }
+            steps {
+                checkout scm
+                sh 'make'
+            }
+        }
     }
 }
