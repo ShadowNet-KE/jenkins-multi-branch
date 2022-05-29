@@ -1,7 +1,7 @@
 // Jenkinsfile (Scripted Pipeline)
 
 pipeline { 
-    agent { label 'docker' }
+    agent { label 'dind-1.0.0' }
     options {
         skipStagesAfterUnstable()
         buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '2', numToKeepStr: '20')
