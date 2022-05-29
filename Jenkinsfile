@@ -11,8 +11,6 @@ pipeline {
             steps {
                 checkout scm
                 sh 'make'
-                stash includes: '**/target/*.jar', name: 'app' 
-                unstash 'app'
                 bat 'make check' 
             }
             post {
