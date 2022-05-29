@@ -12,9 +12,9 @@ pipeline {
                 stash includes: '**/target/*.jar', name: 'app' 
             }
         }
-        stage('Test on Docker') {
+        stage('Default Test') {
             agent { 
-                label 'docker'
+                label 'jenkins-agent'
             }
             steps {
                 unstash 'app' 
@@ -26,7 +26,7 @@ pipeline {
                 }
             }
         }
-        stage('Test on DIND') {
+        stage('DIND Test') {
             agent {
                 label 'dind-1.0.0'
             }
