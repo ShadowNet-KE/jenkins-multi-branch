@@ -12,20 +12,6 @@ pipeline {
                 stash includes: '**/target/*.jar', name: 'app' 
             }
         }
-        stage('Default Test') {
-            agent { 
-                label 'jenkins-agent'
-            }
-            steps {
-                unstash 'app' 
-                sh 'make check'
-            }
-            post {
-                always {
-                    junit '**/target/*.xml'
-                }
-            }
-        }
         stage('DIND Test') {
             agent {
                 label 'dind-1.0.0'
@@ -33,6 +19,20 @@ pipeline {
             steps {
                 unstash 'app'
                 bat 'make check' 
+            }
+            post {
+                always {
+                    junit '**/target/*.xml'
+                }
+            }
+        }
+        stage('Default Test') {
+            agent { 
+                label 'jenkins-agent'
+            }
+            steps {
+                unstash 'app' 
+                sh 'make check'
             }
             post {
                 always {
