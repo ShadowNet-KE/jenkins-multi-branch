@@ -26,19 +26,19 @@ pipeline {
                 }
             }
         }
-        stage('Default Test') {
-            agent { 
-                label 'jenkins-agent'
-            }
-            steps {
-                unstash 'app' 
-                sh 'make check'
-            }
-            post {
-                always {
-                    junit '**/target/*.xml'
-                }
-            }
-        }
+//         stage('Default Test') {
+//             agent { 
+//                 label 'jenkins-agent'
+//             }
+//             steps {
+//                 unstash 'app' 
+//                 sh 'make check'
+//             }
+//             post {
+//                 always {
+//                     junit '**/target/*.xml'
+//                 }
+//             }
+//         }
     }
 }
