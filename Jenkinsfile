@@ -26,9 +26,9 @@ pipeline {
                 }
             }
         }
-        stage('Test on Windows') {
+        stage('Test on DIND') {
             agent {
-                label 'windows'
+                label 'dind-1.0.0'
             }
             steps {
                 unstash 'app'
