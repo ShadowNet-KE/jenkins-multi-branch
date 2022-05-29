@@ -13,11 +13,6 @@ pipeline {
                 sh 'make'
                 bat 'make check' 
             }
-            post {
-                always {
-                    junit '**/target/*.xml'
-                }
-            }
         }
 //         stage('Default Test') {
 //             agent { 
