@@ -13,14 +13,14 @@ pipeline {
                 sh 'make'
             }
         }
-        stage('Jenkins Test') {
-            agent {
-                label 'jenkins-agent'
-            }
-            steps {
-                checkout scm
-                sh 'make'
-            }
-        }
+//         stage('Jenkins Test') { // make: not found
+//             agent {
+//                 label 'jenkins-agent'
+//             }
+//             steps {
+//                 checkout scm
+//                 sh 'make'
+//             }
+//         }
     }
 }
