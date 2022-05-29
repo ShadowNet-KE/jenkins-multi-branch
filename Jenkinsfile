@@ -15,7 +15,6 @@ pipeline {
         stage('Test'){
             steps {
                 sh 'make'
-                junit 'reports/**/*.xml' 
             }
         }
         stage('Deploy') {
