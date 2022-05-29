@@ -1,7 +1,7 @@
 //Jenkinsfile (Declarative Pipeline)
 
 pipeline {
-    agent { label 'docker' } { dockerfile true }
+    agent { label 'docker && dind-1.0.0' } { dockerfile true }
 
 //     checkout scm
 
